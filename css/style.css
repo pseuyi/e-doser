@@ -1,4 +1,5 @@
 h1 {
+  pointer-events: none;
   position: absolute;
   padding: 2em 0;
   margin: 1em 0;
