@@ -1,0 +1,21 @@
+h1 {
+  position: absolute;
+  padding: 2em 0;
+  margin: 1em 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+  color: grey;
+  /*-webkit-text-stroke: 1px #28306b;
+  -webkit-text-fill-color: none;*/
+  font-size: 4.4em;
+  font-family: 'Inconsolata', monospace;
+}
+#version, #directions {
+  font-size: 0.4em;
+  line-height: 0.4em;
+}
+
+/*-ms-transform: scale(2, 7); /* IE 9 */
+/*-webkit-transform: scale(2, 7); /* Safari */
+/*transform: scale(2, 7);*/

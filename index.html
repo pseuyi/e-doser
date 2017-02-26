@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>e-doser</title>
+    <meta name="description" content="e-doser">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
+  </head>
+  <body>
+    <h1 id='header'>e - d o s e r
+        <span id='version'>v1.0</span><br/>
+        <span id='directions'>focus your gaze on mushrooms to explore new territories</span>
+    </h1>
+
+    <a-scene>
+      <a-assets>
+
+        <a-mixin id="ring" geometry="primitive: ring; radiusOuter: 0.15;
+        radiusInner: 0.1;"
+        material="color: grey; shader: flat"
+        cursor=" fuse: true"></a-mixin>
+
+        <audio id="isola" src='/assets/sound/xerrox_isola.mp3'></audio>
+        <audio id="asmr" src='/assets/sound/personal_attention.mp3'></audio>
+
+        <video id="clouds" src="/assets/bg/clouds.mp4"></video>
+
+        <img id="field" crossorigin="anonymous" src="/assets/bg/field.jpg">
+        <img id="cave" crossorigin="anonymous" src="/assets/bg/cave.jpg">
+        <img id="cave2" crossorigin="anonymous" src="/assets/bg/cave2.jpg">
+        <img id="cave3" crossorigin="anonymous" src="/assets/bg/cave3.jpg">
+        <img id="shanghai" crossorigin="anonymous" src="/assets/bg/shanghai.jpg">
+        <img id="stars" crossorigin="anonymous" src="/assets/bg/stars.jpg">
+        <img id="reef" crossorigin="anonymous" src="/assets/bg/reef.jpg">
+
+        <a-asset-item id="obj" src="/assets/boletus.obj"></a-asset-item>
+        <a-asset-item id="mtl" src="/assets/boletus.mtl"></a-asset-item>
+        <a-asset-item id="hp1" src="/assets/_models/hp1/house%20plant.obj"></a-asset-item>
+        <a-asset-item id="hp1" src="/assets/_models/hp1/house%20plant.mtl"></a-asset-item>
+        <a-asset-item id="hp2" src="/assets/_models/hp2/house%20plant.obj"></a-asset-item>
+        <a-asset-item id="hp2" src="/assets/_models/hp2/house%20plant.mtl"></a-asset-item>
+
+        <a-asset-item id="lotus" src="/assets/_models/lotus/lotus.obj"></a-asset-item>
+
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <!-- sky -->
+      <a-sky id="image-360" radius="36" src="#clouds"></a-sky>
+
+      <!-- not links -->
+      <a-entity id="audio" geometry="primitive: torusKnot" material="color: grey"
+      position="0 10 0" sound="src: #isola; autoplay: false">
+          <a-animation attribute="rotation"
+          dur="10000"
+          fill="forwards"
+          to="0 360 0"
+          repeat="indefinite"></a-animation>
+          <a-animation attribute="material.color"
+            from="grey"
+            to="white"
+            dur="1000"
+            easing="ease"
+            repeat="indefinite"></a-animation>
+      </a-entity>
+
+      <!-- links -->
+      <a-entity id="links" layout="type: circle; radius: 9" position="0 -1.6 0">
+        <!-- <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity> -->
+        <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10" set-image="on: click; target: #image-360; src: #shanghai"></a-obj-model>
+        <a-entity>
+          <a-obj-model src="#lotus" scale="0.6 0.6 0.6" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model>
+          <a-animation attribute="rotation"
+             dur="10000"
+             fill="forwards"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
+        </a-entity>
+
+        <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10" set-image="on: click; target: #image-360; src: #cave"></a-obj-model>
+        <a-entity>
+          <a-obj-model src="#lotus" scale="0.6 0.6 0.6" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model>
+          <a-animation attribute="rotation"
+             dur="10000"
+             fill="backwards"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
+        </a-entity>
+
+        <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10" set-image="on: click; target: #image-360; src: #cave2"></a-obj-model>
+        <a-entity>
+          <a-obj-model src="#lotus" scale="0.6 0.6 0.6" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model>
+          <a-animation attribute="rotation"
+             dur="10000"
+             fill="forwards"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
+        </a-entity>
+
+        <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10" set-image="on: click; target: #image-360; src: #cave3"></a-obj-model>
+        <a-entity>
+          <a-obj-model src="#lotus" scale="0.6 0.6 0.6" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model>
+          <a-animation attribute="rotation"
+             dur="10000"
+             fill="backwards"
+             to="0 360 0"
+             repeat="indefinite"></a-animation>
+        </a-entity>
+
+        <!-- <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10"></a-obj-model>
+        <a-obj-model src="#obj" mtl="#mtl" scale="0.04 0.04 0.04" sound="on: click; src: #click-sound" rotation="-90 0 -10"></a-obj-model> -->
+        <!-- <a-obj-model src="#hp1" mtl="#hp1" scale="0.06 0.06 0.06" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model>
+        <a-obj-model src="#hp2" mtl="#hp2" scale="0.01 0.01 0.01" sound="on: click; src: #click-sound" rotation="0 0 -10"></a-obj-model> -->
+      </a-entity>
+
+      <!-- camera + cursor. -->
+      <a-entity camera look-controls wasd-controls>
+        <a-entity mixin="ring"
+          position="0 0 -3">
+          <a-animation begin="cursor-click" easing="ease-in" attribute="scale"
+               fill="backwards" from="0.3 0.3 0.3" to="1 1 1" ></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+               fill="forwards" from="1 1 1" to="0.3 0.3 0.3"></a-animation>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
